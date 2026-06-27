@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-export async function GET() {
+async function handleCheckout() {
   const stripeKey = process.env.STRIPE_SECRET_KEY;
   const priceId = process.env.STRIPE_PRICE_ID;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -31,9 +31,19 @@ export async function GET() {
       return NextResponse.json({ error: 'Checkout URL generation failed' }, { status: 500 });
     }
 
-    return NextResponse.redirect(session.url);
+    // 303 forces the browser to use GET on the redirect, satisfying Stripe
+    return NextResponse.redirect(session.url, 303);
   } catch (err) {
     console.error('Stripe Checkout Error:', err);
     return NextResponse.json({ error: 'Checkout failed' }, { status: 500 });
   }
+}
+
+// Accept BOTH methods so it doesn't matter what the button sends
+export async function GET() {
+  return handleCheckout();
+}
+
+export async function POST() {
+  return handleCheckout();
 }
