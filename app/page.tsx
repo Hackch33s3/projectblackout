@@ -86,14 +86,12 @@ export default function Home() {
             Join hundreds of others who have taken control of their digital privacy.
           </p>
                     {/* CTA Button */}
-          <form action="/api/checkout" method="POST" className="inline-block">
-            <button 
-              type="submit"
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg cursor-pointer"
-            >
-              Start Monitoring - $29/month
-            </button>
-          </form>
+          <a
+  href="/api/checkout"
+  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg inline-block"
+>
+  Start Monitoring - $29/month
+</a>
         </div>
       </section>
 
